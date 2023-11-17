@@ -49,6 +49,9 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='css/style.css') }}"
     />
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
   <body>
     <nav class="navbar bg-neutral text-neutral-content">
@@ -73,5 +76,6 @@
     </nav>
 
     <section class="content">{% block content %}{% endblock %}</section>
+
   </body>
 </html>
