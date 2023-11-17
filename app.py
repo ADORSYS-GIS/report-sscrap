@@ -1,4 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, request, session, flash, jsonify
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
 
 app = Flask(__name__)
 
