@@ -3,8 +3,23 @@
 {% set active_page = "results" %}
 
 {% block content %}
-    <h1>Results</h1>
-    <p> Welcome to the Results page!</p>
+<head>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+</head>
+<body>
+    <div class="container">
+        <h3>WEB SCRAPPER</h3>
+    </div>
+    <div class="container2">
+        <center>
+        <h1>WELCOME TO OUR WEB SCRAPPING <br> SOLUTION</h1><br><br>
+        <button id="mybutton" type="submit" class="click">START ANALYSIS</button>
+        </center>
+    </div>
+</body>
 {% endblock %}
 
 {% block title %}
