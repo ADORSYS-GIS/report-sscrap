@@ -13,7 +13,7 @@ def input():
 	return render_template("input.html")
 
 #setting up backend to receive urls
-@app.route('/scrape', methods=['POST'])
+@app.route('/save_url', methods=['POST'])
 def scrape():
     urls = request.form.getlist('urls')
     validated_urls = validate_urls(urls)
