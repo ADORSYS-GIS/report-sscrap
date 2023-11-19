@@ -3,10 +3,25 @@
 {% set active_page = "input" %}
 
 {% block content %}
-    <h1>Input</h1>
-    <p> Welcome to the input page!</p>
+    <div class="container">
+        <div class="center-content">
+            <p class="welcome-text">Type in your URLs here</p>
+            
+
+            <form class="search-form">
+                <div class="input-group">
+                    <textarea id="urls" name="urls" placeholder="Enter URLs separated by commas" required></textarea>
+                    <button type="submit">Scrap</button>
+                </div>
+            </form>
+
+            <div id="results">
+                <!-- Display the results or relevant information here -->
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block title %}
-    Input webpages URLs
+    Input Webpage URLs
 {% endblock %}
