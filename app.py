@@ -41,7 +41,7 @@ def scrape_data(url, depth, data_to_look_for):
         response.raise_for_status()  # Raise an HTTPError for bad responses
         soup = BeautifulSoup(response.text, 'html.parser')
 
-        # Implement logic to extract relevant data from the BeautifulSoup object
+        # Implementing logic to extract relevant data from the BeautifulSoup object
         scraped_data = extract_data(soup, depth, data_to_look_for)
         return scraped_data
     except requests.exceptions.RequestException as e:
@@ -49,8 +49,7 @@ def scrape_data(url, depth, data_to_look_for):
         return None
 
 def extract_data(soup, depth, data_to_look_for):
-    # Implement your logic to extract data here
-    # For simplicity, let's say we're extracting text from paragraphs
+    # Implementing logic to extract data here
     paragraphs = soup.find_all('p')
     scraped_data = [p.text.strip() for p in paragraphs]
     return scraped_data[:depth]
