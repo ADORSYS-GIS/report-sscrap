@@ -1,6 +1,4 @@
 from flask import Flask, render_template, redirect, url_for, request, session, flash
-from urllib.request import urlopen
-from bs4 import BeautifulSoup
 
 app = Flask(__name__)
 
@@ -15,6 +13,10 @@ def input():
 @app.route("/results")
 def results():
 	return render_template("results.html")
+
+@app.route('/api/start-analysis', methods = ['GET', 'POST'])
+def analysis():
+	return render_template('test.html')
 
 if __name__ == '__main__':
 	app.run(debug=True)
