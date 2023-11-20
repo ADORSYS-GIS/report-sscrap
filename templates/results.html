@@ -3,8 +3,39 @@
 {% set active_page = "results" %}
 
 {% block content %}
-    <h1>Results</h1>
-    <p> Welcome to the Results page!</p>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Initiate Data Analysis</title>
+</head>
+<body>
+  <button id="analyzeButton">Initiate Data Analysis</button>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const analyzeButton = document.getElementById("analyzeButton");
+
+      analyzeButton.addEventListener("click", handleClick);
+
+      function handleClick() {
+        fetch("/api/analyze", {
+          method: "POST",
+        })
+          .then(response => {
+            if (response.ok) {
+              console.log("Data analysis initiated.");
+            } else {
+              console.error("Failed to initiate data analysis.");
+            }
+          })
+          .catch(error => {
+            console.error("An error occurred during data analysis initiation:", error);
+          });
+      }
+    });
+  </script>
+</body>
+</html>
 {% endblock %}
 
 {% block title %}
