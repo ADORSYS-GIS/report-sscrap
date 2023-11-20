@@ -1,10 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, request, session, flash
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
-from sscrapy import extract_and_store_csv
-from bs4 import BeautifulSoup
-import requests
-
 
 app = Flask(__name__)
 
@@ -14,7 +10,7 @@ def index():
 
 @app.route("/input")
 def input():
-	return render_template("input.html")
+	return render_template("input.html")	
 
 @app.route("/results")
 def results():
