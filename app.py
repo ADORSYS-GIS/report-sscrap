@@ -10,7 +10,7 @@ def index():
 
 @app.route("/input")
 def input():
-	return render_template("input.html")	
+	return render_template("input.html")
 
 @app.route("/results")
 def results():
@@ -18,3 +18,4 @@ def results():
 
 if __name__ == '__main__':
 	app.run(debug=True)
+
