@@ -1,0 +1,40 @@
+Index: templates/input.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>{% extends 'base.html' %}\n\n{% set active_page = \"input\" %}\n\n{% block content %}\n    <h1>Input</h1>\n    <p> Welcome to the input page!</p>\n{% endblock %}\n\n{% block title %}\n    Input webpages URLs\n{% endblock %}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/templates/input.html b/templates/input.html
+--- a/templates/input.html	
++++ b/templates/input.html	
+@@ -3,10 +3,25 @@
+ {% set active_page = "input" %}
+ 
+ {% block content %}
+-    <h1>Input</h1>
+-    <p> Welcome to the input page!</p>
++
++<div class="container">
++    <div class="center-content">
++    <p class="welcome-text">Type in your URLs here</p>
++    
++    <form class="search-form">
++    <div class="input-group">
++    <textarea id="urls" name="urls" placeholder="Enter URLs separated by commas" required></textarea>
++    <button type="submit">Scrap</button>
++    </div>
++    </form>
++    
++    <div id="results">
++    <!-- Display the results or relevant information here -->
++    </div>
++    </div>
++    </div>
+ {% endblock %}
+ 
+ {% block title %}
+-    Input webpages URLs
++    Input Webpage URLs
+ {% endblock %}
+\ No newline at end of file
