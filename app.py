@@ -1,10 +1,9 @@
-from flask import Flask, render_template, redirect, url_for, request, session, flash
+from flask import Flask, render_template, redirect, url_for, request, session, flas
 from bs4 import BeautifulSoup
 import requests
 import csv
 import json
 import os
-
 
 app = Flask(__name__)
 
@@ -70,6 +69,10 @@ def save_to_json(data):
 
     with open(os.path.join(directory, 'scraped_data.json'), 'w', encoding='utf-8') as jsonfile:
         json.dump(data, jsonfile, ensure_ascii=False, indent=2)
+
+@app.route('/api/start-analysis', methods = ['GET', 'POST'])
+def analysis():
+	return render_template('test.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
