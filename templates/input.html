@@ -3,10 +3,33 @@
 {% set active_page = "input" %}
 
 {% block content %}
+<<<<<<< HEAD
     <h1>Input</h1>
     <p> Welcome to the input pageTypeError: The view function for 'extract_csv' did not return a valid response. The function either returned None or ended without a return statement.!</p>
+=======
+    <div class="form-container">
+        <h2>Input Webpage URLs</h2>
+        <form action="{{ url_for('scrape') }}" method="post" class="input-form">
+            <label for="url">URL:</label>
+            <input type="text" name="url" required value="https://example.com/python-page">
+            <label for="depth">Depth of Scraping:</label>
+            <input type="number" name="depth" value="1" min="1">
+            <label for="data_to_look_for">Specific Data to Look For:</label>
+            <select name="data_to_look_for">
+                <option value="python">Python</option>
+                <option value="programming">Programming</option>
+                <option value="code">Code</option>
+            </select>
+            <button type="submit">Scrape Data</button>
+        </form>
+    </div>
+>>>>>>> bc48bf7bb7b62b897055e2b5b380fa09d83ba8b8
 {% endblock %}
 
 {% block title %}
-    Input webpages URLs
+    Input Webpages URLs
 {% endblock %}
+
+<!-- Link to the external CSS file -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
