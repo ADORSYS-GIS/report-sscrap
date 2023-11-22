@@ -4,6 +4,7 @@ body{
     font-size: 20px;
     height: 100vh;
     margin: 0px, 0px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 .container h3{
@@ -40,12 +41,6 @@ body{
     body {
       height: auto;
     }
-/* static/css/style.css */
-body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-}
 
 .form-container {
     background-color: #f4f4f4;
@@ -86,5 +81,4 @@ button {
 
 button:hover {
     background-color: #45a049;
-
 }
