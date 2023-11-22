@@ -4,13 +4,17 @@
 
 {% block content %}
 <div class="container">
-    <h3>WEB SCRAPPER</h3>
+    <marquee behavior="slide" direction="up">
+        <h3>WEB SCRAPPER</h3>
+    </marquee>
 </div>
 <div class="container2">
-    <center>
-        <h1>WELCOME TO OUR WEB SCRAPPING <br> SOLUTION</h1><br><br>
-        <button id="mybutton" type="submit" class="btn btn-primary">START ANALYSIS</button>
-    </center>
+    <marquee behavior="slide" direction="up" scrollamount="25">
+        <center>
+            <h1>WELCOME TO OUR WEB SCRAPPING <br> SOLUTION</h1><br><br>
+            <button id="mybutton" type="submit" class="btn btn-primary" style="background: rgb(44, 70, 175);">START ANALYSIS</button>
+        </center>
+    </marquee>
 </div>
     <h2>Scraped Data</h2>
     {% if data %}
