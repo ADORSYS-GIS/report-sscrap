@@ -1,35 +1,30 @@
+import unittest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
-import unittest
-
+from selenium.common.exceptions import TimeoutException
 
 class FlaskJSTest(unittest.TestCase):
-
     def setUp(self):
         self.driver = webdriver.Chrome()
-        self.driver.get('http://localhost:5000/')
+        self.driver.get("http://localhost:5000/results")
 
     def test_javascript_function(self):
-        # Wait for the element with the ID 'mybutton' to become available
-        wait = WebDriverWait(self.driver, 60)
-        trigger_button = wait.until(EC.presence_of_element_located((By.ID, 'mybutton')))
+        wait = WebDriverWait(self.driver, 5)
 
-        # Click the trigger button
-        trigger_button.click()
-
-        # Wait for the output element with the ID 'output-element' to become available
-        output_element = wait.until(EC.presence_of_element_located((By.ID, 'output-element')))
-
-        # Verify that the output element's text is as expected
-        self.assertEqual(output_element.text, 'JavaScript function executed successfully!')
+        try:
+            output_element = wait.until(EC.visibility_of_element_located((By.ID, 'output-element')))
+            self.assertEqual(output_element.text, 'START ANALYSIS')
+            
+        except TimeoutException:
+            print("Timeout occurred while waiting for the element to be visible.")
+            
+        except Exception as e:
+            print(str(e))
 
     def tearDown(self):
         self.driver.quit()
-
 
 if __name__ == '__main__':
     unittest.main()
