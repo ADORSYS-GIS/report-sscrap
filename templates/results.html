@@ -3,10 +3,29 @@
 {% set active_page = "results" %}
 
 {% block content %}
-    <h1>Results</h1>
-    <p> Welcome to the Results page!</p>
+<div class="container">
+    <h3>WEB SCRAPPER</h3>
+</div>
+<div class="container2">
+    <center>
+        <h1>WELCOME TO OUR WEB SCRAPPING <br> SOLUTION</h1><br><br>
+        <button id="mybutton" type="submit" class="btn btn-primary">START ANALYSIS</button>
+    </center>
+</div>
+    <h2>Scraped Data</h2>
+    {% if data %}
+        <ul>
+            {% for item in data %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+        <p>Data saved to <a href="{{ url_for('static', filename='scraped_data/scraped_data.csv') }}">CSV</a> and <a href="{{ url_for('static', filename='scraped_data/scraped_data.json') }}">JSON</a> files.</p>
+    {% else %}
+        <p>No data scraped.</p>
+    {% endif %}
 {% endblock %}
 
 {% block title %}
-    Results
+    Scrape Results
 {% endblock %}
+
