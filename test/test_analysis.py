@@ -16,6 +16,9 @@ class FlaskJSTest(unittest.TestCase):
         try:
             output_element = wait.until(EC.visibility_of_element_located((By.ID, 'output-element')))
             self.assertEqual(output_element.text, 'START ANALYSIS')
+            button_element = self.driver.find_element(By.ID, 'mybutton')
+            button_element.click()
+            wait.until(EC.url_to_be('http://localhost:5000/test.html'))
             
         except TimeoutException:
             print("Timeout occurred while waiting for the element to be visible.")
