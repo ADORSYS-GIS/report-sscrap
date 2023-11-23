@@ -4,3 +4,4 @@ __pycache__
 .DS_Store
 project
 *.blog_scrapped
+node_modules
