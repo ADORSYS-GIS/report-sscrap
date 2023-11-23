@@ -7,7 +7,7 @@ class FlaskURLTestCase(unittest.TestCase):
     def setUp(self):
         self.app = Flask(__name__)
         self.app.config['TESTING'] = True
-        self.driver = webdriver.Chrome()  # Replace with the appropriate WebDriver for your browser
+        self.driver = webdriver.Chrome()  
 
         @self.app.route('/save_url', methods=['POST'])
         def scrape():
@@ -22,7 +22,7 @@ class FlaskURLTestCase(unittest.TestCase):
         self.driver.quit()
 
     def test_save_url(self):
-        self.driver.get('http://localhost:5000')  # Replace with the URL of your Flask app
+        self.driver.get('http://localhost:5000') 
         input_element = self.driver.find_element_by_name('urls')
         input_element.send_keys('https:/google.com')
         input_element.send_keys(Keys.RETURN)
