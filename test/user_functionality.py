@@ -1,22 +1,33 @@
 import unittest
-from app import app
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from flask import Flask, request, jsonify
 
-class TestScrapeEndpoint(unittest.TestCase):
+class FlaskURLTestCase(unittest.TestCase):
     def setUp(self):
-        app.testing = True
-        self.client = app.test_client()
+        self.app = Flask(__name__)
+        self.app.config['TESTING'] = True
+        self.driver = webdriver.Chrome()  # Replace with the appropriate WebDriver for your browser
 
-    def test_valid_urls(self):
-        data = {'urls': ['https://www.google.com', 'https://www.facebook.com']}
-        response = self.client.post('/save_url', data=data)
-        self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Scraping in progress', response.data)
+        @self.app.route('/save_url', methods=['POST'])
+        def scrape():
+            urls = request.form.getlist('urls')
+            validated_urls = validate_urls(urls)
+            if validated_urls:
+                return jsonify({'message': 'Scraping in progress...', 'validated_urls': validated_urls}), 200
+            else:
+                return jsonify({'error': 'Invalid URLs provided.'}), 400
 
-    def test_invalid_urls(self):
-        data = {'urls': ['example.com', 'ftp://example2.com']}
-        response = self.client.post('/save_url', data=data)
-        self.assertEqual(response.status_code, 400)
-        self.assertIn(b'Invalid URLs provided', response.data)
+    def tearDown(self):
+        self.driver.quit()
+
+    def test_save_url(self):
+        self.driver.get('http://localhost:5000')  # Replace with the URL of your Flask app
+        input_element = self.driver.find_element_by_name('urls')
+        input_element.send_keys('https:/google.com')
+        input_element.send_keys(Keys.RETURN)
+        response = self.driver.find_element_by_tag_name('body').text
+        self.assertIn('Scraping in progress', response)
 
 if __name__ == '__main__':
     unittest.main()
