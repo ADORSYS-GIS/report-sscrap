@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+<!-- {% extends 'base.html' %}
 
 {% set active_page = "results" %}
 
@@ -18,5 +18,29 @@
 
 {% block title %}
     Scrape Results
-{% endblock %}
+{% endblock %} -->
 
+<!-- templates/result.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Scraping Result</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Scraping Result</h1>
+        <p>URL: {{ url }}</p>
+        <p>Choice: {{ choice }}</p>
+        <p>Total Characters: {{ total_characters }}</p>
+        <p>Extracted Data:</p>
+        <ul>
+            {% for item in data %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
