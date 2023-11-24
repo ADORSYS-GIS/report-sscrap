@@ -1,8 +1,21 @@
-<!-- {% extends 'base.html' %}
+{% extends 'base.html' %}
 
 {% set active_page = "results" %}
 
 {% block content %}
+<div class="container">
+    <marquee behavior="slide" direction="up">
+        <h3>WEB SCRAPPER</h3>
+    </marquee>
+</div>
+<div class="container2">
+    <marquee behavior="slide" direction="up" scrollamount="25">
+        <center>
+            <h1>WELCOME TO OUR WEB SCRAPPING <br> SOLUTION</h1><br><br>
+            <button id="mybutton" type="submit" class="btn btn-primary" style="background: rgb(44, 70, 175);">START ANALYSIS</button>
+        </center>
+    </marquee>
+</div>
     <h2>Scraped Data</h2>
     {% if data %}
         <ul>
@@ -18,29 +31,7 @@
 
 {% block title %}
     Scrape Results
-{% endblock %} -->
+{% endblock %}
 
 <!-- templates/result.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <title>Scraping Result</title>
-</head>
-<body>
-    <div class="container">
-        <h1>Scraping Result</h1>
-        <p>URL: {{ url }}</p>
-        <p>Choice: {{ choice }}</p>
-        <p>Total Characters: {{ total_characters }}</p>
-        <p>Extracted Data:</p>
-        <ul>
-            {% for item in data %}
-                <li>{{ item }}</li>
-            {% endfor %}
-        </ul>
-    </div>
-</body>
-</html>
+
