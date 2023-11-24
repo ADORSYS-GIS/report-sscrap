@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 from requests.exceptions import RequestException
 from urllib.error import HTTPError, URLError
 
-def scrape_website(url, choice):
+def scrape_website(url):
     total_characters = 0
     extracted_data = []
 
@@ -12,16 +12,12 @@ def scrape_website(url, choice):
         response.raise_for_status()
         soup = BeautifulSoup(response.content, "html.parser")
 
-        if choice == '1':  # User chose to scrape text
-            for element in soup.find_all('p'):
-                extracted_data.append(element.text)
-                total_characters += len(element.text)
-        elif choice == '2':  # User chose to scrape images
-            for img in soup.find_all('img', src=True):
-                extracted_data.append(img['src'])
-        else:
-            print("Invalid choice. Please enter '1' or '2'.")
-            return None
+        for element in soup.find_all('p'):
+            extracted_data.append(element.text)
+            total_characters += len(element.text)
+
+        for img in soup.find_all('img', src=True):
+            extracted_data.append(img['src'])
 
         return extracted_data, total_characters
 
@@ -33,4 +29,5 @@ def scrape_website(url, choice):
         print(e)
     except Exception as e:
         print(f"Error scraping website: {url}")
+       
         
