@@ -1,0 +1,6 @@
+notebook
+pandas
+flask
+beautifulsoup4
+selenium
+chart.js
