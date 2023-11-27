@@ -90,7 +90,7 @@ def save_to_json(data):
     with open(os.path.join(directory, 'scraped_data.json'), 'w', encoding='utf-8') as jsonfile:
         json.dump(data, jsonfile, ensure_ascii=False, indent=2)
 
-@app.route('/api/start-analysis', methods=['GET', 'POST'])
+@app.route('impliment-data-analysis', methods=['GET', 'POST'])
 def load_scraped_data(file_path='scraped_data/scraped_data.csv', delimiter='\t'):
     try:
         if os.path.exists(file_path) and os.path.getsize(file_path) > 0:
