@@ -1,4 +1,3 @@
-# database.py
 import sqlite3
 
 def create_database_schema():
@@ -17,8 +16,6 @@ def create_database_schema():
     ''')
 
     connection.commit()
-    connection.close()
-
 def store_analysis_results_in_database(results):
     connection = sqlite3.connect('analysis_results.db')
     cursor = connection.cursor()
