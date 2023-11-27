@@ -1,12 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, request, session, flash, jsonify
-from urllib.request import urlopen
-from bs4 import BeautifulSoup
-import requests
-import csv
-import json
-import os
-# app.py
-from flask import Flask, render_template, redirect, url_for, request, flash
+from flask import Flask, render_template, redirect, url_for, request, flash, jsonify
 from scraping import scrape_website, save_to_csv, clear_csv_file
 
 app = Flask(__name__)
@@ -20,7 +12,7 @@ def index():
 def input():
     return render_template("input.html")
 
-#setting up backend to receive urls
+# Setting up backend to receive urls
 @app.route('/save_url', methods=['POST'])
 def scrape():
     urls = request.form.getlist('urls')
@@ -40,20 +32,18 @@ def validate_urls(urls):
     
     return validated_urls
 
-
 # Modified routing based on input fields from the user involving images or number of text
 @app.route('/scrape', methods=['POST'])
 def scrape_data():
     urls = request.form.get('urls')
     depth = int(request.form.get('depth', 1))
-    data_type = request.form.get('data_type', 'text')
 
     url_list = [url.strip() for url in urls.split('\n') if url.strip()]
 
     scraped_data = []
 
     for url in url_list:
-        data = scrape_website(url, depth, data_type)
+        data = scrape_website(url, depth)
         scraped_data.append(data)
 
     save_to_csv(scraped_data)
@@ -65,3 +55,4 @@ def scrape_data():
 if __name__ == '__main__':
     clear_csv_file()  # Clear the CSV file before running the application
     app.run(debug=True)
+
