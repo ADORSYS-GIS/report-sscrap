@@ -18,7 +18,7 @@ def input():
 
 #setting up backend to receive urls
 @app.route('/save_url', methods=['POST'])
-def save_url():
+def scrap():
     urls = request.form.getlist('urls')
     validated_urls = validate_urls(urls)
     
