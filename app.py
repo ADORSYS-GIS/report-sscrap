@@ -14,11 +14,11 @@ def index():
 
 @app.route("/input")
 def input():
-    return render_template("input.html")
+    return render_template("index.html")
 
 #setting up backend to receive urls
 @app.route('/save_url', methods=['POST'])
-def scrape():
+def save_url():
     urls = request.form.getlist('urls')
     validated_urls = validate_urls(urls)
     
