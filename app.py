@@ -94,7 +94,18 @@ def save_to_json(data):
 
 @app.route('/api/start-analysis', methods = ['GET', 'POST'])
 def analysis():
-	return render_template('test.html')
+    # retrieve analysed result from the db
+    conn = sqlite3.connect('webpages.db')
+    c = conn.cursor()
+    results = c.fetchall()
+    conn.close()
+
+    # process data for chartjs
+    labels = [results[0] for result in results]
+    data = [result[1] for result in results]
+
+    chart_data = {'labels': labels, 'data': data}
+    return render_template('results.html', chart_data=chart_data)
 
 if __name__ == '__main__':
 	app.run(debug=True)
