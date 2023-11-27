@@ -50,12 +50,3 @@ def save_to_csv(data):
 # Additional function for testing purposes only
 def clear_csv_file():
     open('scraped_data.csv', 'w').close()
-
-
-
-
-
-
-
-
-
