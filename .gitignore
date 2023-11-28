@@ -6,6 +6,4 @@ project
 .ipynb_checkpoints/
 chart.png
 chart1.png
-data.csv
 scrapped_data.csv
-static/js/chart_rendering.js
