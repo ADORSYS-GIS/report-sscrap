@@ -2,6 +2,9 @@
 
 ## PREREQUISTICS
 -pandas library
+-sklean.cluster
+-re
+-os
 
 1- Descriiptive analyses which involves the analyses of the scrapped data such as words and images count per url enterred lets demonstrate the algorithm used here
 
