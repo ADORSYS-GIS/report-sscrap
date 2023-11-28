@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, request, session, flash, jsonify
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
+import sqlite3
 import requests
 import csv
 import json
@@ -93,7 +94,31 @@ def save_to_json(data):
 
 @app.route('/api/start-analysis', methods = ['GET', 'POST'])
 def analysis():
-	return render_template('test.html')
+    # Check if webpages.db exists and is not empty
+    if os.path.exists('webpages.db') and os.path.getsize('webpages.db') > 0:
+        # Retrieve analysis results from SQLite3 database
+        conn = sqlite3.connect('webpages.db')
+        c = conn.cursor()
+        c.execute('SELECT * FROM results')
+        results = c.fetchall()
+        conn.close()
+    else:
+        # Read data from data.csv file
+        with open('data.csv', 'r') as file:
+            csv_reader = csv.reader(file)
+            next(csv_reader)  # Skip the header row
+            results = list(csv_reader)
+
+    # Process data for Chart.js
+    labels = [f"Website {i+1}" for i in range(len(results))]
+    text_data = [int(result[1]) for result in results]
+    no_images = [int(result[2]) for result in results]
+
+    # Get total number of images for each website
+    images = [f"Website {i+1}: {int(result[2])} images" for i, result in enumerate(results)]
+    text = [f"Website {i+1}: {int(result[1])} text" for i, result in enumerate(results)]
+    
+    return render_template('test.html', labels=labels, no_images=no_images ,text_data=text_data, images=images, text=text)
 
 if __name__ == '__main__':
 	app.run(debug=True)

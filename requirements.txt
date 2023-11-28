@@ -3,3 +3,4 @@ pandas
 flask
 beautifulsoup4
 seleniumchart.js
+chart.js
