@@ -1,5 +1,0 @@
-notebook
-pandas
-flask
-beautifulsoup4
-seleniumchart.js
