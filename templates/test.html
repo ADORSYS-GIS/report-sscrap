@@ -3,7 +3,53 @@
 {% set active_page = "results" %}
 
 {% block content %}
-<h1>Get your analysis here!</h1>
+<h2>Chart Rendering</h2>
+
+<head>
+    <!-- Chart.js CDN link -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- PapaParse CDN link -->
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script>
+</head>
+
+<div align="center">
+    <div class="main">
+        <h1>TEXT ANALYSIS</h1>
+    </div>
+    <div class="website-box">
+        <h2>NUMBER OF TEXT</h2>
+        <ul class="list-unordered">
+            {% for txt in text %}
+                <li>{{ txt }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <!-- Print values of labels and data for debugging -->
+    <div>{{ labels }}</div>
+    <div>{{ data }}</div>
+    <div>{{ text }}</div>
+    <!-- <canvas id="Total_number_of_characters" class="first"></canvas> -->
+    <canvas id="Total_number_of_characters" class="first" width="400" height="400" backgroud="white"></canvas>
+
+</div>
+
+<center>
+    <h1>IMAGE ANALYSIS</h1>
+    <div class="website-box">
+        <h2>NUMBER OF IMAGES</h2>
+        <ul class="list-unordered">
+            {% for image in images %}
+                <li>{{ image }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</center>
+<canvas id="Total_number_of_images"></canvas> 
+
+<!-- Load chart_rendering.js after the DOM has finished loading -->
+<!-- <script src="{{ url_for('static', filename='chart_rendering.js') }}?labels={{ labels | tojson }}&data={{ data | tojson }}" defer></script> -->
+<script src="{{ url_for('static', filename='chart_rendering.js') }}?labels={{ labels | tojson }}&text_data={{ text_data | tojson }}&no_images={{ no_images | tojson }}" defer></script>
 {% endblock %}
 
 {% block title %}
