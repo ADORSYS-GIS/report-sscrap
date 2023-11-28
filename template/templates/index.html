@@ -1,0 +1,67 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Results</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Include Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        #app {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            margin-top: 10px;
+        }
+        .loading {
+            color: #007bff;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .results {
+            margin-top: 20px;
+        }
+        .error {
+            margin-top: 20px;
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1 class="text-center mb-4">Analysis Results</h1>
+
+        <button class="btn btn-primary" @click="fetchAnalysisResults">Fetch Results</button>
+
+        <!-- Loading indicator -->
+        <div v-if="loading" class="loading text-center">Loading...</div>
+
+        <!-- Display results -->
+        <div v-if="!loading && results.length > 0" class="results">
+            <h2>Fetched Data:</h2>
+            <ul class="list-group">
+                <li v-for="result in results" :key="result" class="list-group-item">{{ result }}</li>
+            </ul>
+        </div>
+
+        <!-- Display error message -->
+        <div v-if="error" class="error">
+            <h2>Error:</h2>
+            <p>{{ error }}</p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% set active_page = "input" %}
+{% block content %}
+    <div class="form-container">
+        <h2>Input Webpage URLs</h2>
+        <form action="{{ url_for('scrape') }}" method="post" class="input-form">
+            <label for="url">URL:</label>
+            <input type="text" name="url" required value="https://example.com/python-page">
+            <label for="depth">Depth of Scraping:</label>
+            <input type="number" name="depth" value="1" min="1">
+            <label for="data_to_look_for">Specific Data to Look For:</label>
+            <select name="data_to_look_for">
+                <option value="python">Python</option>
+                <option value="programming">Programming</option>
+                <option value="code">Code</option>
+            </select>
+            <button type="submit">Scrape Data</button>
+        </form>
+    </div>
+{% endblock %}
+{% block title %}
+    Input webpages URLs
+{% endblock %}
+<!-- Link to the external CSS file -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">

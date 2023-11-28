@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% set active_page = "results" %}
+
+{% block content %}
+<div class="container">
+    <marquee behavior="slide" direction="up">
+        <h3>WEB SCRAPPER</h3>
+    </marquee>
+</div>
+<div class="container2">
+    <marquee behavior="slide" direction="up" scrollamount="25">
+        <center>
+            <h1>WELCOME TO OUR WEB SCRAPPING <br> SOLUTION</h1><br><br>
+            <button id="mybutton" type="submit" class="btn btn-primary" style="background: rgb(44, 70, 175);">START ANALYSIS</button>
+        </center>
+    </marquee>
+</div>
+    <h2>Scraped Data</h2>
+    {% if data %}
+        <ul>
+            {% for item in data %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+        <p>Data saved to <a href="{{ url_for('static', filename='scraped_data/scraped_data.csv') }}">CSV</a> and <a href="{{ url_for('static', filename='scraped_data/scraped_data.json') }}">JSON</a> files.</p>
+    {% else %}
+        <p>No data scraped.</p>
+    {% endif %}
+{% endblock %}
+
+{% block title %}
+    Scrape Results
+{% endblock %}
+
