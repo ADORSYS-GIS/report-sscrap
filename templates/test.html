@@ -29,7 +29,7 @@
     <div>{{ labels }}</div>
     <div>{{ text_data }}</div>
     <div>{{ text }}</div>
-    <canvas id="Total_number_of_characters" class="first" width="400" height="400" backgroud="white"></canvas>
+    <canvas id="Total_number_of_characters" class="first"></canvas>
 
 </div>
 
@@ -47,7 +47,7 @@
 <canvas id="Total_number_of_images"></canvas> 
 
 <!-- Load chart_rendering.js after the DOM has finished loading -->
-<script src="{{ url_for('static', filename='chart_rendering.js') }}?labels={{ labels | tojson }}&text_data={{ text_data | tojson }}&no_images={{ no_images | tojson }}" defer></script>
+<script src="{{ url_for('static', filename='js/chart_rendering.js') }}?labels={{ labels_json }}&text_data={{ text_data | tojson }}&no_images={{ no_images | tojson }}&images={{ images | tojson }}" defer></script>
 {% endblock %}
 
 {% block title %}

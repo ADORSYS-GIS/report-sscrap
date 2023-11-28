@@ -118,8 +118,11 @@ def analysis():
     # Get total number of images for each website
     images = [f"Website {i+1}: {int(result[2])} images" for i, result in enumerate(results)]
     text = [f"Website {i+1}: {int(result[1])} text" for i, result in enumerate(results)]
-    
-    return render_template('test.html', labels=labels, no_images=no_images ,text_data=text_data, images=images, text=text)
+
+    # Encode the labels data as a JSON string
+    labels_json = json.dumps(labels)
+
+    return render_template('test.html', labels_json=labels_json, no_images=no_images, text_data=text_data, images=images, text=text)
 
 if __name__ == '__main__':
 	app.run(debug=True)
