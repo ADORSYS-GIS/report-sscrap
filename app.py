@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, request, flash, jsonify
 from scraping import scrape_website, save_to_csv, clear_csv_file
+from database import store_analysis_results_in_database
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Setting a secret key for flash messages
@@ -48,7 +49,11 @@ def scrape_data():
 
     save_to_csv(scraped_data)
 
-    flash('Scraping and saving to CSV successful!', 'success')
+#intergrating database functionality with  analysis script 
+
+    store_analysis_results_in_database(scraped_data)
+
+    flash('Scraping and saving to database successful!', 'success')
 
     return render_template('results.html', data=scraped_data)
 
