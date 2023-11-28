@@ -41,20 +41,20 @@ def validate_urls(urls):
 def results():
     return render_template("results.html")
 
-@app.route('/scrape', methods=['POST'])
-def scrape():
-    url = request.form.get('url')
-    depth = int(request.form.get('depth', 1))
-    data_to_look_for = request.form.get('data_to_look_for', '')
+# @app.route('/scrape', methods=['POST'])
+# def scrape():
+#     url = request.form.get('url')
+#     depth = int(request.form.get('depth', 1))
+#     data_to_look_for = request.form.get('data_to_look_for', '')
 
-    # Scrape data from the provided URL
-    scraped_data = scrape_data(url, depth, data_to_look_for)
+#     # Scrape data from the provided URL
+#     scraped_data = scrape_data(url, depth, data_to_look_for)
 
-    # Save scraped data to CSV and JSON files
-    save_to_csv(scraped_data)
-    save_to_json(scraped_data)
+#     # Save scraped data to CSV and JSON files
+#     save_to_csv(scraped_data)
+#     save_to_json(scraped_data)
 
-    return render_template('results.html', data=scraped_data)
+#     return render_template('results.html', data=scraped_data)
 
 def scrape_data(url, depth, data_to_look_for):
     try:
@@ -94,18 +94,31 @@ def save_to_json(data):
 
 @app.route('/api/start-analysis', methods = ['GET', 'POST'])
 def analysis():
-    # retrieve analysed result from the db
-    conn = sqlite3.connect('webpages.db')
-    c = conn.cursor()
-    results = c.fetchall()
-    conn.close()
+    # Check if webpages.db exists and is not empty
+    if os.path.exists('webpages.db') and os.path.getsize('webpages.db') > 0:
+        # Retrieve analysis results from SQLite3 database
+        conn = sqlite3.connect('webpages.db')
+        c = conn.cursor()
+        c.execute('SELECT * FROM results')
+        results = c.fetchall()
+        conn.close()
+    else:
+        # Read data from data.csv file
+        with open('data.csv', 'r') as file:
+            csv_reader = csv.reader(file)
+            results = list(csv_reader)
 
     # process data for chartjs
-    labels = [results[0] for result in results]
-    data = [result[1] for result in results]
+    labels = [f"Website {i+1}" for i in range(len(results))]
+    data = [int(result[1]) for result in results]
 
+    # Get total number of images for each website
+    images = [f"Website {i+1}: {int(result[2])} images" for i, result in enumerate(results)]
+
+    # Pass chart data and image data to template
     chart_data = {'labels': labels, 'data': data}
-    return render_template('results.html', chart_data=chart_data)
+    
+    return render_template('result.html', chart_data=chart_data, images=images)
 
 if __name__ == '__main__':
 	app.run(debug=True)
