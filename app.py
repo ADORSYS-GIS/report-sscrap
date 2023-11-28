@@ -16,7 +16,7 @@ def index():
 def input():
     return render_template("input.html")
 
-#setting up backend to receive urls
+# setting up backend to receive urls
 @app.route('/save_url', methods=['POST'])
 def scrape():
     urls = request.form.getlist('urls')
@@ -26,7 +26,6 @@ def scrape():
         return jsonify({'message': 'Scraping in progress...', 'validated_urls': validated_urls}), 200
     else:
         return jsonify({'error': 'Invalid URLs provided.'}), 400
-
 def validate_urls(urls):
     validated_urls = []
     
@@ -41,20 +40,20 @@ def validate_urls(urls):
 def results():
     return render_template("results.html")
 
-@app.route('/scrape', methods=['POST'])
-def scrape():
-    url = request.form.get('url')
-    depth = int(request.form.get('depth', 1))
-    data_to_look_for = request.form.get('data_to_look_for', '')
+# @app.route('/scrape', methods=['POST'])
+# def scrape():
+#     url = request.form.get('url')
+#     depth = int(request.form.get('depth', 1))
+#     data_to_look_for = request.form.get('data_to_look_for', '')
 
-    # Scrape data from the provided URL
-    scraped_data = scrape_data(url, depth, data_to_look_for)
+#     # Scrape data from the provided URL
+#     scraped_data = scrape_data(url, depth, data_to_look_for)
 
-    # Save scraped data to CSV and JSON files
-    save_to_csv(scraped_data)
-    save_to_json(scraped_data)
+#     # Save scraped data to CSV and JSON files
+#     save_to_csv(scraped_data)
+#     save_to_json(scraped_data)
 
-    return render_template('results.html', data=scraped_data)
+#     return render_template('results.html', data=scraped_data)
 
 def scrape_data(url, depth, data_to_look_for):
     try:
@@ -94,7 +93,7 @@ def save_to_json(data):
 
 @app.route('/api/start-analysis', methods = ['GET', 'POST'])
 def analysis():
-	return render_template('test.html')
+	return render_template('results.html')
 
 if __name__ == '__main__':
 	app.run(debug=True)
