@@ -107,7 +107,8 @@ def analysis():
         with open('data.csv', 'r') as file:
             csv_reader = csv.reader(file)
             next(csv_reader)  # Skip the header row
-            results = list(csv_reader)
+            # converting the values to integers using int() before appending them to the results list
+            results = [[int(result[0]), int(result[1]), int(result[2])] for result in csv_reader]
 
     # Process data for Chart.js
     labels = [f"Website {i+1}" for i in range(len(results))]
