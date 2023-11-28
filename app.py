@@ -93,7 +93,7 @@ def save_to_json(data):
 
 @app.route('/api/start-analysis', methods = ['GET', 'POST'])
 def analysis():
-	return render_template('results.html')
+	return render_template('test.html')
 
 if __name__ == '__main__':
 	app.run(debug=True)
