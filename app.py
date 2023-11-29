@@ -126,7 +126,7 @@ def analysis():
         'text_data': text_data
     }
     json_data = json.dumps(data) 
-    print(json_data)
+
     return render_template('test.html', json_data=json_data)
 
 if __name__ == '__main__':
