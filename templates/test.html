@@ -48,7 +48,7 @@
 <canvas id="Total_number_of_images"></canvas> 
 
 <!-- Load chart_rendering.js after the DOM has finished loading -->
-<!-- <script src="{{ url_for('static', filename='chart_rendering.js') }}?labels={{ labels | tojson }}&data={{ data | tojson }}" defer></script> -->
+
 <script src="{{ url_for('static', filename='chart_rendering.js') }}?labels={{ labels | tojson }}&text_data={{ text_data | tojson }}&no_images={{ no_images | tojson }}" defer></script>
 {% endblock %}
 
