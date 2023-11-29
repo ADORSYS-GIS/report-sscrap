@@ -2,7 +2,7 @@ body{
     background: linear-gradient(to right, rgb(0, 0, 0),rgb(112, 112, 112));
     color: white;
     font-size: 20px;
-    height: 800vh;
+    height: 900vh;
     margin: 0px, 0px;
 }
 
@@ -88,4 +88,31 @@ body{
         background-color: #45a049;
 
     }
+}
+
+.analysis-charts{
+    padding: 50px 200px;
+}
+.analysis-charts .textchart-details,
+.analysis-charts .imagechart-details{
+    width: 40%;
+    background: #ccc;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: #fff;
+    padding: 20px 0;
+    margin: 100px 0;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+}
+.analysis-charts .textchart-details h1,
+.analysis-charts .imagechart-details h1{
+    color: black;
+    font-size: 28px;
+}
+.analysis-charts .textchart-details .details,
+.analysis-charts .imagechart-details .details{
+    color: black;
 }

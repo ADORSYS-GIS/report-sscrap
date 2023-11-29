@@ -111,18 +111,23 @@ def analysis():
             results = [[int(result[0]), int(result[1]), int(result[2])] for result in csv_reader]
 
     # Process data for Chart.js
-    labels = [f"Website {i+1}" for i in range(len(results))]
-    text_data = [int(result[1]) for result in results]
-    no_images = [int(result[2]) for result in results]
+    labels = [result[0] for result in results]
+    texts = [result[1] for result in results]
+    images = [result[2] for result in results]
+    images_data = [f"Website {result[0]}: {result[2]} images" for result in results]
+    text_data = [f"Website {result[0]}: {result[1]} text" for result in results]
+   
+   # Convert data to JSON format
+    data = {
+        'labels': labels,
+        'texts': texts,
+        'images': images,
+        'images_data': images_data,
+        'text_data': text_data
+    }
+    json_data = json.dumps(data) 
 
-    # Get total number of images for each website
-    images = [f"Website {i+1}: {int(result[2])} images" for i, result in enumerate(results)]
-    text = [f"Website {i+1}: {int(result[1])} text" for i, result in enumerate(results)]
-
-    # Encode the labels data as a JSON string
-    labels_json = json.dumps(labels)
-
-    return render_template('test.html', labels_json=labels_json, no_images=no_images, text_data=text_data, images=images, text=text)
+    return render_template('test.html', json_data=json_data)
 
 if __name__ == '__main__':
 	app.run(debug=True)

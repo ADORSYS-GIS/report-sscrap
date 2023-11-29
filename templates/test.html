@@ -3,34 +3,38 @@
 {% set active_page = "results" %}
 
 {% block content %}
-<h2>Chart Rendering</h2>
 
-<head>
-    <!-- Chart.js CDN link -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Chart.js CDN link -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <!-- PapaParse CDN link -->
-    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script>
-</head>
+<!-- PapaParse CDN link -->
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script>
 
-<div align="center">
-    <div class="main">
-        <h1>TEXT ANALYSIS</h1>
+<div class="analysis-charts">
+    <h2>Chart Rendering</h2>
+
+    <div align="center">
+        <div class="textchart-details">
+            <h1>TEXT ANALYSIS</h1>
+            <div class="details"></div>
+        </div>
+        <!-- Displaying both charts from chart_rendering.js -->
+        <canvas id="text-chart"></canvas>
     </div>
-    <div class="website-box">
-        <h2>NUMBER OF TEXT</h2>
-        <ul class="list-unordered">
-            {% for txt in text %}
-                <li>{{ txt }}</li>
-            {% endfor %}
-        </ul>
+
+    <div align="center">
+        <div class="imagechart-details">
+            <h1>IMAGE ANALYSIS</h1>
+            <div class="details"></div>
+        </div>
+        <!-- Displaying both charts from chart_rendering.js -->
+        <canvas id="image-chart"></canvas>
     </div>
-    <!-- Print values of labels and data for debugging -->
+    <!-- Print values of labels and text_data for debugging -->
     <div>{{ labels }}</div>
-    <div>{{ data }}</div>
+    <div>{{ text_data }}</div>
     <div>{{ text }}</div>
-    <!-- <canvas id="Total_number_of_characters" class="first"></canvas> -->
-    <canvas id="Total_number_of_characters" class="first" width="400" height="400" backgroud="white"></canvas>
+    <canvas id="Total_number_of_characters" class="first"></canvas>
 
 </div>
 
@@ -48,8 +52,7 @@
 <canvas id="Total_number_of_images"></canvas> 
 
 <!-- Load chart_rendering.js after the DOM has finished loading -->
-
-<script src="{{ url_for('static', filename='chart_rendering.js') }}?labels={{ labels | tojson }}&text_data={{ text_data | tojson }}&no_images={{ no_images | tojson }}" defer></script>
+<script src="{{ url_for('static', filename='js/chart_rendering.js') }}?labels={{ labels_json }}&text_data={{ text_data | tojson }}&no_images={{ no_images | tojson }}&images={{ images | tojson }}" defer></script>
 {% endblock %}
 
 {% block title %}
