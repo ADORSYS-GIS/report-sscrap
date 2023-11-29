@@ -1,38 +1,18 @@
-When it comes to modularizing code for web scraping there are several approaches you can take to ensure clean codes. Here are some suggestions:
-# Separate modules:
-divide your code into logical modules based on their specific responsibility for example; beautifulsoup, pandas, flask, selenium, notebook.
-# Create utility functions:
-create functions in each module to carry out specific task. These functions can then be saved and stored which can then be imported into other modules when needed
-# The use of configuration files:
-Making use of configuration file such as JSON to make the code more flexible. This allows us to modify our used parameters without modifying the code itself.
-# Implementation of error handling:
-In handling errors and exceptions gracefully we would make use of the try-except blocks to catch and handle exceptions that occur during project. One can take appropriate actions based on the specific task which he carries
-# Unittesting:
-Write a unit test for each module to ensure that it function correctly and produce the expected results. The unit test also helps catch bugs early enough 
-in this code 
-# file.py
-def function1(args1):
-    # Some implementation that uses `function2`
-    pass
+When we talk about code modularization it is all about separating the given project into separate portions in our case scraping which would be broken down into smaller portions or task to carry out to make it easier to understand. we could follow the following:
 
-def function2(args2):
-    # Some unknown implementation
-    pass
+- Firstly in our project we would import different libraries in our code which would help us carry out different task. here we would be using beautifulsoup, pandas, flask, notebook, chart js etc
+to install our library we would do
+```pip install <library-name>```
 
-if __name__ == '__main__':
-    function1("someArgument")
-# error found:
-When the script is run directly, the function1 is called with the argument "someArgument". However, since function2 is called within function1 but it is defined after function1 in the code, an error will occur. The error will indicate that function2 is not defined.
-# provided solution:
-To resolve this issue, you can either move the definition of function2 before function1. Here's an example of moving the definition of function2 before function1:
-def function2(args2):
-    # Some unknown implementation
-    pass
+- Furthermore, we move next in building our modules in each module we create functions and where necessary import a library that would help us to the specific task and in that way we can create our function and save it which can be called in other modules for use
+an example of the module is
+# app.py
+import <library-name>
+def fuction():
+    #unknown implementations
 
-def function1(args1):
-    # Some implementation that uses `function2`
-    pass
+- Inaddition, after writing the intended module we have to do a documentation it is help the non developers understand the way our output is
 
-if __name__ == '__main__':
-    function1("someArgument")
-in this script provided function2 is defined before it is used in function1, ensuring that the code will execute without any errors.
+- Also, it is necessary to catch errors in our modules and be able to handle the errors which has been foumd and as such we would make use of the try and except in handling errors and exceptions in our codes
+
+- Finally, we can not say our scripts are perfect if we do not carry out testing. the testing would enable use to know that our modules function correctly and also that it produces the intended result for which it was written for
