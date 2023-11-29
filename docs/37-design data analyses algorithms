@@ -1,0 +1,24 @@
+## designing the data analyses algorithms for the scrapped data
+
+## PREREQUISTICS
+-pandas library
+
+1- Descriiptive analyses which involves the analyses of the scrapped data such as words and images count per url enterred lets demonstrate the algorithm used here
+
+    . we start by verifying if there is data in the analysed file
+    . if true then we count the number of words and images in each column of the analysed file
+    . then from all the words and images we the obtaind and average of all of them
+    . if false that is file being empty we return zero
+    
+2- Extracting relevant features for clusterring(cluster analyses)
+   were we extract relevant features for clusterring such as
+   . mean
+   . median of the analysed data
+
+3- Data correlation
+    . were we analyse the trend of data such average words count versus average image count
+
+
+
+
+    
