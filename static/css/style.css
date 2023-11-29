@@ -93,6 +93,13 @@ body{
 .analysis-charts{
     padding: 50px 200px;
 }
+.analysis-charts .center{
+    margin-top: 60px;
+}
+.analysis-charts .center h1{
+    font-size: 40px;
+}
+
 .analysis-charts .textchart-details,
 .analysis-charts .imagechart-details{
     width: 40%;
@@ -101,7 +108,7 @@ body{
     border-radius: 20px;
     box-shadow: #fff;
     padding: 20px 0;
-    margin: 100px 0;
+    margin: 10px 0;
     display: flex;
     flex-flow: column;
     align-items: center;
@@ -111,8 +118,46 @@ body{
 .analysis-charts .imagechart-details h1{
     color: black;
     font-size: 28px;
+    font-weight: bold;
 }
 .analysis-charts .textchart-details .details,
 .analysis-charts .imagechart-details .details{
     color: black;
 }
+/* Responsiveness for small screen sizes */
+@media only screen and (min-width: 200px) and (max-width: 767px)  {
+    .analysis-charts {
+        padding: 50px 20px;
+    }
+    .analysis-charts .center h1 {
+        font-size: 30px;
+    }
+    .analysis-charts .textchart-details, .analysis-charts .imagechart-details {
+        width: 60%;
+        margin: 40px 0;
+    }
+    .analysis-charts .textchart-details h1, .analysis-charts .imagechart-details h1 {
+        font-size: 22px;
+    }
+}
+/* Responsiveness for medium screens */
+@media only screen and (min-width: 768px) and (max-width: 1023px)  {
+    .analysis-charts {
+        padding: 50px 80px;
+    }
+    .analysis-charts .textchart-details, .analysis-charts .imagechart-details {
+        width: 60%;
+        background: #ccc;
+        height: auto;
+        border-radius: 20px;
+        box-shadow: #fff;
+        padding: 20px 0;
+        margin: 10px 0 40px 0;
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+}
+    
