@@ -1,4 +1,4 @@
-// chart_rendering.js
+// Rendering analyst results to charts
 
 function renderChart(jsonData) {
   // Use the jsonData object to render the charts
@@ -18,7 +18,7 @@ function renderChart(jsonData) {
       data: {
           labels: labels,
           datasets: [{
-              label: 'Text Data',
+              label: 'Number of Text',
               data: texts,
               backgroundColor: 'rgba(75, 192, 192, 0.2)',
               borderColor: 'rgba(75, 192, 192, 1)',
@@ -29,7 +29,17 @@ function renderChart(jsonData) {
           responsive: true,
           scales: {
               y: {
-                  beginAtZero: true
+                  beginAtZero: true,
+                  title: {
+                      display: true,
+                      text: 'Number of Text'
+                  }
+              },
+              x: {
+                  title: {
+                      display: true,
+                      text: 'Websites URL Number'
+                  }
               }
           }
       }
@@ -41,7 +51,7 @@ function renderChart(jsonData) {
       data: {
           labels: labels,
           datasets: [{
-              label: 'Image Data',
+              label: 'Number of Images',
               data: images,
               backgroundColor: 'rgba(192, 75, 192, 0.2)',
               borderColor: 'rgba(192, 75, 192, 1)',
@@ -52,9 +62,36 @@ function renderChart(jsonData) {
           responsive: true,
           scales: {
               y: {
-                  beginAtZero: true
+                  beginAtZero: true,
+                  title: {
+                      display: true,
+                      text: 'Number of Images'
+                  }
+              },
+              x: {
+                  title: {
+                      display: true,
+                      text: 'Websites URL Number'
+                  }
               }
           }
       }
   });
+
+  // Display text_data and image_data in .details divs
+  var textDetails = document.querySelector('.textchart-details .details');
+  var imageDetails = document.querySelector('.imagechart-details .details');
+
+  var textDataHtml = '';
+  for (var i = 0; i < texts.length; i++) {
+      textDataHtml += 'Website ' + labels[i] + ': ' + texts[i] + ' text<br>';
+  }
+  
+  textDetails.innerHTML = textDataHtml;
+
+  var imageDataHtml = '';
+  for (var i = 0; i < images.length; i++) {
+      imageDataHtml += 'Website '+ labels[i] + ': ' + images[i] + ' images<br>';
+  }
+  imageDetails.innerHTML = imageDataHtml;
 }
