@@ -1,0 +1,21 @@
+## Version control and code review processes
+These are both methods or strategies used by developers to enhance a smooth flow in their project.
+
+# Version control(git):
+
+- This is a tool used by developers to manage changes of documented computer programs, large   websites and other collection of information.
+- Particularly, "git" is used as a version control tool in this project to enhance it progress
+- The verious team members communicates the progress of their tasks using the following git commands.
+* git branch
+* git checkout
+* git status 
+* git add 
+* git commit -m "description"
+* git push 
+- With the above commands, teams are able to share their work coverage.
+
+# Code review:
+
+- This is a methodical assessment of code designed to identify bugs,prevent future problems and also increase the code quality.
+- Team members after having finished their tasks and pushed, creat a pull requests so that the code is viewed by th scrom master before merging.
+- Daily scrum meetings also allows the team members to demonstrate their codes in which  corrections and changes are made, reducing bugs, conflicts and future risks.
