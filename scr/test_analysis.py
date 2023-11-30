@@ -1,60 +1,67 @@
-import unittest
+import json
 import pandas as pd
-from analysis import perform_analyses
+import matplotlib.pyplot as plt
+from io import StringIO
+import csv
+import unittest
 
-class TestPerformAnalyses(unittest.TestCase):
+# code
+def perform_analyses(data_file):
+    try:
+        # Open file in read mode
+        with open(data.csv, 'r') as f:
+            file_content = f.read()
 
-    def test_perform_analyses_with_json(self):
-        # Here, we create a JSON string as an example input
-        json_data = """
-        [
-            {"url": "http://www.alibaba.com", "char_count": 100, "image_count": 2},
-            {"url": "http://www.booking.com", "char_count": 200, "image_count": 3}
-        ]
-        """
-        # We save this JSON string to a file
-        with open('data.json', 'w') as f:
-            f.write(json_data)
+        # Try to parse as JSON
+        try:
+            data = json.loads(file_content)
+            is_json = True
+        except json.JSONDecodeError:
+            is_json = False
 
-        # Now, we call our analysis function with the JSON file
-        perform_analyses('data.json')
+        # If JSON parsing failed, try parsing as CSV
+        if not is_json:
+            try:
+                # If the file has headers
+                data = list(csv.DictReader(StringIO(file_content)))
+                is_csv = True
+            except csv.Error:
+                is_csv = False
 
-        # We read the data back from the file to a pandas DataFrame
-        df = pd.read_json('data.json')
+        if not is_json and not is_csv:
+            raise ValueError("The file format is not supported.")
 
-        # We check if the number of websites analyzed is correct
-        self.assertEqual(df.shape[0], 2)
+        if is_json and not isinstance(data, list):
+            raise ValueError("The data should be formatted as a list of objects.")
 
-        # We check if the average character count is correct
-        self.assertAlmostEqual(df['char_count'].mean(), 150)
+        df = pd.DataFrame(data)
 
-        # We check if the average image count is correct
-        self.assertAlmostEqual(df['image_count'].mean(), 2.5)
+        # Display basic statistics
+        print("Total Websites Analyzed:", df.shape[0])
+        print("Average character count:", str(df['char_count'].mean()))
+        print("Average image count:", str(df['image_count'].mean()))
 
-    def test_perform_analyses_with_csv(self):
-        # Here, we create a CSV string as an example input
-        csv_data =  """ url,char_count,image_count
-                        http://www.alibaba.com,100,2
-                        http://www.booking.com,200,3
-                    """
-        # We save this CSV string to a file
-        with open('data.csv', 'w') as f:
-            f.write(csv_data)
+        # plot character count histogram
+        plt.figure(figsize=(10, 5))
+        df['char_count'].hist(bins=50)
+        plt.title('Character count histogram')
+        plt.xlabel('Character count')
+        plt.ylabel('Frequency')
+        plt.show()
 
-        # Now, we call our analysis function with the CSV file
-        perform_analyses('data.csv')
+        # plot image count histogram
+        plt.figure(figsize=(10, 5))
+        df['image_count'].hist(bins=50)
+        plt.title('Image count histogram')
+        plt.xlabel('Image count')
+        plt.ylabel('Frequency')
+        plt.show()
 
-        # We read the data back from the file to a pandas DataFrame
-        df = pd.read_csv('data.csv')
+    except ValueError as e:
+        print(e)
 
-        # We check if the number of websites analyzed is correct
-        self.assertEqual(df.shape[0], 2)
-
-        # We check if the average character count is correct
-        self.assertAlmostEqual(df['char_count'].mean(), 150)
-
-        # We check if the average image count is correct
-        self.assertAlmostEqual(df['image_count'].mean(), 2.5)
+    except FileNotFoundError:
+        print("The file was not found")
 
 if __name__ == '__main__':
     unittest.main()

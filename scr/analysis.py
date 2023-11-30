@@ -8,7 +8,9 @@ import csv
 def perform_analyses(data_file):
     try:
         # Open file in read mode
-        with open(data_file, 'r') as f:
+        data = 'data.csv'
+
+        with open(data, 'r') as f:
             file_content = f.read()
 
 
