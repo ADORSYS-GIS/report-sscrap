@@ -95,6 +95,10 @@ def save_to_json(data):
 @app.route('/api/start-analysis', methods = ['GET', 'POST'])
 def analysis():
 	return render_template('test.html')
+#added and reconfigure functionality to coonect database to the analysis script 
+        store_analysis_results_in_database(scraped_data)
+    flash('Scraping and saving to database successful!', 'success')
+    return render_template('results.html', data=scraped_data)
 
 if __name__ == '__main__':
 	app.run(debug=True)
