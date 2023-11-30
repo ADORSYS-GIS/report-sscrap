@@ -3,9 +3,42 @@
 {% set active_page = "results" %}
 
 {% block content %}
-<h1>Get your analysis here!</h1>
-{% endblock %}
 
-{% block title %}
-    Results
+<!-- Chart.js CDN link -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- PapaParse CDN link -->
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script>
+
+<div class="analysis-charts">
+    <h2>Chart Rendering</h2>
+
+    <div align="center" class="center">
+        <h1>TEXT ANALYSIS</h1>
+        <div class="textchart-details">
+            <h1>NUMBER OF TEXT</h1>
+            <div class="details"></div>
+        </div>
+        <!-- Displaying both charts from chart_rendering.js -->
+        <canvas id="text-chart"></canvas>
+    </div>
+
+    <div align="center" class="center">
+        <h1>IMAGE ANALYSIS</h1>
+        <div class="imagechart-details">
+            <h1>NUMBER OF IMAGES</h1>
+            <div class="details"></div>
+        </div>
+        <!-- Displaying both charts from chart_rendering.js -->
+        <canvas id="image-chart"></canvas>
+    </div>
+
+</div>
+<!-- Linke to chart_rendering.js file -->
+<script src="{{ url_for('static', filename='js/chart_rendering.js') }}"></script>
+<script>
+    var jsonData = JSON.parse('{{ json_data|safe }}');
+    renderChart(jsonData);
+</script>
+
 {% endblock %}

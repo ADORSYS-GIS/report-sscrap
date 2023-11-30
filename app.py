@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, request, session, flash, jsonify
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
+import sqlite3
 import requests
 import csv
 import json
@@ -16,7 +17,7 @@ def index():
 def input():
     return render_template("index.html")
 
-#setting up backend to receive urls
+# setting up backend to receive urls
 @app.route('/save_url', methods=['POST'])
 def scrap():
     urls = request.form.getlist('urls')
@@ -26,7 +27,6 @@ def scrap():
         return jsonify({'message': 'Scraping in progress...', 'validated_urls': validated_urls}), 200
     else:
         return jsonify({'error': 'Invalid URLs provided.'}), 400
-
 def validate_urls(urls):
     validated_urls = []
     
@@ -94,7 +94,40 @@ def save_to_json(data):
 
 @app.route('/api/start-analysis', methods = ['GET', 'POST'])
 def analysis():
-	return render_template('test.html')
+    # Check if webpages.db exists and is not empty
+    if os.path.exists('webpages.db') and os.path.getsize('webpages.db') > 0:
+        # Retrieve analysis results from SQLite3 database
+        conn = sqlite3.connect('webpages.db')
+        c = conn.cursor()
+        c.execute('SELECT * FROM results')
+        results = c.fetchall()
+        conn.close()
+    else:
+        # Read data from data.csv file
+        with open('data.csv', 'r') as file:
+            csv_reader = csv.reader(file)
+            next(csv_reader)  # Skip the header row
+            # converting the values to integers using int() before appending them to the results list
+            results = [[int(result[0]), int(result[1]), int(result[2])] for result in csv_reader]
+
+    # Process data for Chart.js
+    labels = [result[0] for result in results]
+    texts = [result[1] for result in results]
+    images = [result[2] for result in results]
+    images_data = [f"Website {result[0]}: {result[2]} images" for result in results]
+    text_data = [f"Website {result[0]}: {result[1]} text" for result in results]
+   
+   # Convert data to JSON format
+    data = {
+        'labels': labels,
+        'texts': texts,
+        'images': images,
+        'images_data': images_data,
+        'text_data': text_data
+    }
+    json_data = json.dumps(data) 
+
+    return render_template('test.html', json_data=json_data)
 
 if __name__ == '__main__':
 	app.run(debug=True)

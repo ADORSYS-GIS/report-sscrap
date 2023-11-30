@@ -2,7 +2,7 @@ body{
     background: linear-gradient(to right, rgb(0, 0, 0),rgb(112, 112, 112));
     color: white;
     font-size: 20px;
-    height: 100vh;
+    height: 900vh;
     margin: 0px, 0px;
 }
 
@@ -41,50 +41,123 @@ body{
       height: auto;
     }
 /* static/css/style.css */
-body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .form-container {
+        background-color: #f4f4f4;
+        width: 400px;
+        margin: 50px auto;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .input-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    label {
+        margin-bottom: 8px;
+    }
+
+    input,
+    select {
+        margin-bottom: 16px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+
+    button {
+        padding: 10px;
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    button:hover {
+        background-color: #45a049;
+
+    }
 }
 
-.form-container {
-    background-color: #f4f4f4;
-    width: 400px;
-    margin: 50px auto;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.analysis-charts{
+    padding: 50px 200px;
+}
+.analysis-charts .center{
+    margin-top: 60px;
+}
+.analysis-charts .center h1{
+    font-size: 40px;
 }
 
-.input-form {
+.analysis-charts .textchart-details,
+.analysis-charts .imagechart-details{
+    width: 40%;
+    background: #ccc;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: #fff;
+    padding: 20px 0;
+    margin: 10px 0;
     display: flex;
-    flex-direction: column;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
 }
-
-label {
-    margin-bottom: 8px;
+.analysis-charts .textchart-details h1,
+.analysis-charts .imagechart-details h1{
+    color: black;
+    font-size: 28px;
+    font-weight: bold;
 }
-
-input,
-select {
-    margin-bottom: 16px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
+.analysis-charts .textchart-details .details,
+.analysis-charts .imagechart-details .details{
+    color: black;
 }
-
-button {
-    padding: 10px;
-    background-color: #4caf50;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
+/* Responsiveness for small screen sizes */
+@media only screen and (min-width: 200px) and (max-width: 767px)  {
+    .analysis-charts {
+        padding: 50px 20px;
+    }
+    .analysis-charts .center h1 {
+        font-size: 30px;
+    }
+    .analysis-charts .textchart-details, .analysis-charts .imagechart-details {
+        width: 60%;
+        margin: 40px 0;
+    }
+    .analysis-charts .textchart-details h1, .analysis-charts .imagechart-details h1 {
+        font-size: 22px;
+    }
 }
-
-button:hover {
-    background-color: #45a049;
+/* Responsiveness for medium screens */
+@media only screen and (min-width: 768px) and (max-width: 1023px)  {
+    .analysis-charts {
+        padding: 50px 80px;
+    }
+    .analysis-charts .textchart-details, .analysis-charts .imagechart-details {
+        width: 60%;
+        background: #ccc;
+        height: auto;
+        border-radius: 20px;
+        box-shadow: #fff;
+        padding: 20px 0;
+        margin: 10px 0 40px 0;
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        justify-content: center;
+    }
 
 }
+    
