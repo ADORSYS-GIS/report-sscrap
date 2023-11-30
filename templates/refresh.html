@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Latest Data</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Latest Data</h1>
+    <ul id="dataList"></ul>
+
+    <script>
+        $(document).ready(function() {
+            setInterval(fetchLatestData, 60000);  // Fetch data every minute
+
+            function fetchLatestData() {
+                $.ajax({
+                    url: '/latest_data',
+                    type: 'GET',
+                    success: function(response) {
+                        displayData(response);
+                    },
+                    error: function(xhr, status, error) {
+                        console.log('Error:', error);
+                    }
+                });
+            }
+
+            function displayData(data) {
+                $('#dataList').empty();
+                data.forEach(function(item) {
+                    $('#dataList').append('<li>' + item + '</li>');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
