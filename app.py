@@ -5,6 +5,7 @@ import requests
 import csv
 import json
 import os
+from apiendpoint import fetch_data_from_database
 
 app = Flask(__name__)
 
@@ -95,6 +96,21 @@ def save_to_json(data):
 @app.route('/api/start-analysis', methods = ['GET', 'POST'])
 def analysis():
 	return render_template('test.html')
+
+#API endpoint to fetch analysis result from databse
+@app.route('/api/fetch-data', methods=['GET'])
+def get_data():
+    # Get specified columns from the query parameters
+    columns = request.args.getlist('columns')
+
+    # Fetch data based on criteria
+    df = fetch_data_from_database(columns=columns)
+
+    # Convert the DataFrame to an HTML table 
+    html_table = df.to_html(index=False, classes='table-striped table-bordered')
+
+    # rendering the table
+    return render_template('table_template.html', table_content=html_table)
 
 if __name__ == '__main__':
 	app.run(debug=True)
