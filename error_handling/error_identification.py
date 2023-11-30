@@ -1,29 +1,29 @@
 import requests
-from bs4 import BeautifulSoup
+import sqlite3
+from sqlite3 import Error as SQLiteError
 
-def check_network_errors(url):
+#identifying network issues
+def check_network_errors(urls):
     try: 
-        response = requests.get(url)
+        response = requests.get(urls)
         response.raise_for_status()
         print("Network connection is working fine.")
     except requests.exceptions.RequestException as err:
         print("Network connection error:", err)
 
-def check_input_errors(url, input_selector):
-    try: 
-        response = requests.get(url)
-        response.raise_for_status()
-        soup = BeautifulSoup(response.content, 'html.parser')
-        inputs = soup.select(input_selector)
+#identifying database errors 
 
-        if not inputs:
-            print("No input elements found for the given selector.")
-        else:
-            for input_element in inputs:
-                if 'error' in input_element.get('class', ''):
-                    print("Input error detected:", input_element)
-                else: 
-                    print("Input element is fine:", input_element)
-    except requests.exceptions.RequestException as err:
-        print ("Network connection error parsing HTML:", err)
+try:
+    connection = sqlite3.connect("analysis_results.db")
+    # Continue with the code
+except SQLiteError as e:
+    print("Error connecting to the database. Please contact support or verify input data.")
+    # Handle the error gracefully
 
+def validate_urls(urls):
+    validated_urls = []
+    for url in urls:
+        if not url.startswith(('http://', 'https://')):
+            return None
+
+        validated_urls.append(url)

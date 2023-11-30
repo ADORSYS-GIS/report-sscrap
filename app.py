@@ -67,7 +67,17 @@ def scrape_data(url, depth, data_to_look_for):
         return scraped_data
     except requests.exceptions.RequestException as e:
         print(f"Error during scraping: {e}")
+ 
         return None
+#identifying input errors when entered from the user interface 
+def validate_urls(urls):
+    validated_urls = []
+
+    for url in urls:
+        if not url.startswith(('http://', 'https://')):
+            return None
+
+        validated_urls.append(url)
 
 def extract_data(soup, depth, data_to_look_for):
     # Implementing logic to extract data here
