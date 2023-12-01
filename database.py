@@ -1,4 +1,3 @@
-# creating the database schema > database.py
 import sqlite3
 
 def create_database_schema():
@@ -17,4 +16,18 @@ def create_database_schema():
     ''')
 
     connection.commit()
-    connection.close()
+def store_analysis_results_in_database(results):
+    connection = sqlite3.connect('analysis_results.db')
+    cursor = connection.cursor()
+
+    try:
+        for result in results:
+            cursor.execute('''
+                INSERT INTO analysis_results (url, number_of_text, total_text, number_of_images)
+                VALUES (?, ?, ?, ?)
+            ''', (result['url'], len(result['text']), len(result['total_text']), len(result['images'])))
+    except sqlite3.Error as e:
+        print(f"SQLite error: {e}")
+    finally:
+        connection.commit()
+        connection.close()

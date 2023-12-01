@@ -8,10 +8,12 @@
             <textarea rows="5" cols="60" name="url" placeholder="https://example.com/python-page"></textarea>
             <label for="depth">Depth of Scraping:</label>
             <input type="number" name="depth" value="1" min="1">
+
             <label for="data_to_look_for">Specific Data to Look For:</label>
             <select name="data_to_look_for">
                 <option value="python">Number Of Images</option>
                 <option value="programming">Number Of Text</option>
+
             </select>
             <button class="btn" type="submit">Scrape Data</button>
         </form>
@@ -22,5 +24,3 @@
 {% endblock %}
 <!-- Link to the external CSS file -->
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-
-
