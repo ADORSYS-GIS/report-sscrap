@@ -9,7 +9,7 @@ import unittest
 def perform_analyses(data_file):
     try:
         # Open file in read mode
-        with open(data.csv, 'r') as f:
+        with open(data_file, 'r') as f:
             file_content = f.read()
 
         # Try to parse as JSON
