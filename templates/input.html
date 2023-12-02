@@ -4,14 +4,41 @@
 {% block content %}
     <div class="form-container">
         <h2>Input Webpage URLs</h2>
-        <form action="" method="POST" class="input-form">
+        <form action="" method="POST" class="input-form" onsubmit="validateUrl(); return false;">
             <textarea rows="5" cols="60" name="url" placeholder="https://example.com/python-page"></textarea>
             <label for="depth">Depth of Scraping:</label>
             <input type="number" name="depth" value="1" min="1">
-            </select>
             <button class="btn" type="submit">Scrape Data</button>
         </form>
     </div>
+    <script>
+        // Function to check if a URL is valid
+        function isValidUrl(url) {
+            // Regular expression for a more permissive URL validation
+            const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+
+            // Allow URLs without specifying the protocol
+            const urlWithoutProtocolRegex = /^[^ "]+\.[a-zA-Z]{2,}$/;
+
+            // Check if the URL matches either of the regular expressions
+            return urlRegex.test(url) || urlWithoutProtocolRegex.test(url);
+        }
+
+        // Function to validate the entered URL
+        function validateUrl() {
+            // Get the URL value from the input field
+            const userUrl = document.getElementsByName("url")[0].value;
+
+            // Check if the URL is valid
+            if (isValidUrl(userUrl)) {
+                // Display success message if the URL is valid
+                console.log("URL is valid. Proceed with the entered URL: " + userUrl);
+            } else {
+                // Display error message if the URL is not valid
+                alert("Hello dear user, the URL you just passed in isn't valid. Example of an appropriate URL is adorsys.com");
+            }
+        }
+    </script>
 {% endblock %}
 {% block title %}
     Input webpages URLs

@@ -11,11 +11,11 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return redirect(url_for("input"))
+    return redirect(url_for("index.html"))
 
 @app.route("/input")
 def input():
-    return render_template("index.html")
+    return render_template("input.html")
 
 #setting up backend to receive urls
 @app.route('/save_url', methods=['POST'])
