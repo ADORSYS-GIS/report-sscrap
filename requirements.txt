@@ -4,3 +4,4 @@ flask
 beautifulsoup4
 selenium
 chart.js
+sklearn.cluster
