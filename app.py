@@ -59,6 +59,53 @@ def scrape_data():
 
     return render_template('results.html', data=scraped_data)
 
+def scrape_data(url, depth, data_to_look_for):
+    try:
+        response = requests.get(url)
+        response.raise_for_status()  # Raise an HTTPError for bad responses
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        # Implementing logic to extract relevant data from the BeautifulSoup object
+        scraped_data = extract_data(soup, depth, data_to_look_for)
+        return scraped_data
+    except requests.exceptions.RequestException as e:
+        print(f"Error during scraping: {e}")
+        return None
+
+def extract_data(soup, depth, data_to_look_for):
+    # Implementing logic to extract data here
+    paragraphs = soup.find_all('p')
+    scraped_data = [p.text.strip() for p in paragraphs]
+    return scraped_data[:depth]
+
+def save_to_csv(data):
+    directory = 'scraped_data'
+    os.makedirs(directory, exist_ok=True)  # Create the directory if it doesn't exist
+
+    with open(os.path.join(directory, 'scraped_data.csv'), 'w', newline='', encoding='utf-8') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(['Data'])
+        for item in data:
+            writer.writerow([item])
+
+def save_to_json(data):
+    directory = 'scraped_data'
+    os.makedirs(directory, exist_ok=True)  # Create the directory if it doesn't exist
+
+    with open(os.path.join(directory, 'scraped_data.json'), 'w', encoding='utf-8') as jsonfile:
+        json.dump(data, jsonfile, ensure_ascii=False, indent=2)
+
+@app.route('/api/start-analysis', methods = ['GET', 'POST'])
+def analysis():
+
+#added and reconfigure functionality to coonect database to the analysis script 
+    store_analysis_results_in_database(scraped_data)
+    flash('Scraping and saving to database successful!', 'success')
+    return render_template('results.html', data=scraped_data)
+
+if __name__ == '__main__':
+	app.run(debug=True)
+
 #API endpoint to fetch analysis result from databse
 @app.route('/api/fetch-data', methods=['GET'])
 def get_data():
@@ -77,3 +124,4 @@ def get_data():
 if __name__ == '__main__':
     clear_csv_file()  # Clear the CSV file before running the application
     app.run(debug=True)
+
