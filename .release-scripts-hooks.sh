@@ -32,28 +32,36 @@ function get_remote_repo_name {
 # Parameter $1 - current release version as text
 # Returns the develop branch name as text
 function get_develop_branch_name {
-  echo "develop"
+  if [[ "$1" == *"support"* ]]; then
+    echo "develop/$1"
+  else
+    echo "develop"
+  fi
 }
 
 # Hook method to define the master branch name
 # Parameter $1 - current release version as text
 # Returns the master branch name as text
 function get_master_branch_name {
-  echo "main"
+  if [[ "$1" == *"support"* ]]; then
+    echo "main/$1"
+  else
+    echo "main"
+  fi
 }
 
 # Hook method to format the release branch name
 # Parameter $1 - version as text
 # Returns the formatted release branch name as text
 function format_release_branch_name {
-  echo "release-$1"
+  echo "release/$1"
 }
 
 # Hook method to format the hotfix branch name
 # Parameter $1 - version as text
 # Returns the formatted hotfix branch name as text
 function format_hotfix_branch_name {
-  echo "hotfix-$1"
+  echo "hotfix/$1"
 }
 
 # Hook to build the snapshot modules before release
