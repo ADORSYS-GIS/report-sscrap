@@ -5,3 +5,5 @@ __pycache__
 project
 node_modules
 doc1/29-design-the-results-interface.md
+
+.idea
